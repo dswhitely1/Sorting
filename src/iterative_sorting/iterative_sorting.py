@@ -59,8 +59,35 @@ the output sequence.
 
 # STRETCH: implement the Count Sort function below
 def count_sort(arr, maximum=-1):
+    print(f'Input: {arr}')
+    # Need to define a count list with a maximum passed in, maybe the max of the array
+    # Modify the count array to add sums of the previous indexes
+    count_list = [0 for x in range(0, maximum)]
+    # Loop through the range 0 - maximum
+    # Search Arr for all numbers in the index
+    # Add the total to count[index]
+    for i in range(0, maximum):
+        total = 0
+        for y in range(0, len(arr)):
+            if arr[y] == i:
+                total += 1
+        count_list[i] = total
+
+    # Need a positional counter to hold change position
+    # While Loop while sum of count_list > 0
+
+    current_index = 0
+    list_index = 0
+    while current_index < maximum:
+        if count_list[current_index] > 0:
+            arr[list_index] = current_index
+            count_list[current_index] -= 1
+            list_index += 1
+        else:
+            current_index += 1
     return arr
 
 
 print(selection_sort([1, 5, 8, 4, 2, 9, 6, 0, 3, 7]))
 print(bubble_sort([1, 5, 8, 4, 2, 9, 6, 0, 3, 7]))
+print(count_sort([4, 8, 4, 2, 0, 0, 6, 2, 9], 10))
